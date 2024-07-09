@@ -25,6 +25,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@ui5/webcomponents": "^2.0.1"
+		"@ui5/webcomponents": "^2.0.1",
+		"@ui5/webcomponents-fiori": "^2.0.1"
 	}
 }
