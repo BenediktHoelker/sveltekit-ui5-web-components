@@ -30,10 +30,15 @@
 	import '@ui5/webcomponents-icons/dist/slim-arrow-right.js';
 
 	export let data;
+
+	const onItemClick = (event) => {
+		const selectedKey = event.detail.item.getAttribute('data-key');
+		window.location.href = '/' + selectedKey;
+	};
 </script>
 
-<ui5-flexible-column-layout id="fcl" class="fcl">
-	<div class="col" slot="startColumn">
+<ui5-flexible-column-layout id="fcl" layout="TwoColumnsMidExpanded" disable-resizing="true">
+	<div slot="startColumn">
 		<ui5-shellbar
 			primary-title="Smart Store, New York"
 			notifications-count="4"
@@ -43,66 +48,16 @@
 			<ui5-toggle-button icon="sap-icon://da" slot="assistant"></ui5-toggle-button>
 			<ui5-shellbar-item icon="disconnected" text="Disconnect"></ui5-shellbar-item>
 		</ui5-shellbar>
-		<br /><br />
-		<ui5-list id="col1list" header-text="Products (13)" selection-mode="Single">
+		<ui5-list
+			id="col1list"
+			header-text="Products (13)"
+			selection-mode="Single"
+			on:item-click={onItemClick}
+		>
 			{#each data.todos as { ID, title }}
-				<ui5-li description={title}>{ID}</ui5-li>
+				<ui5-li data-key={ID}>{title}</ui5-li>
 			{/each}
 		</ui5-list>
 	</div>
-	<div class="col" slot="midColumn">
-		<div class="colHeader">
-			<ui5-title id="col2title" level="H2" style="min-width: 1px;"></ui5-title>
-			<div class="colSubHeader">
-				<ui5-button design="Emphasized">Edit</ui5-button>
-				<ui5-button design="Transparent" icon="add"></ui5-button>
-				<ui5-button id="fullscreenMidColumn" design="Transparent" icon="full-screen"></ui5-button>
-				<ui5-button id="closeMidColumn" icon="decline" design="Transparent"></ui5-button>
-			</div>
-		</div>
-		<br />
-		<section style="padding: 1rem 1rem;">
-			<ui5-title level="H3">General Information</ui5-title>
-			<br />
-			<div
-				style="display:flex; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap"
-			>
-				<div style="display:flex; flex-direction: row; align-items: center;">
-					<ui5-avatar
-						id="avatar"
-						icon="laptop"
-						color-scheme="Accent5"
-						size="XL"
-						style="margin: 0 1rem; min-width: 7rem;"
-					>
-					</ui5-avatar>
-					<div>
-						<div class="productInfo">
-							<ui5-title level="H5">Product:</ui5-title>
-							<ui5-title level="H5" id="lblName"></ui5-title>
-						</div>
-						<br />
-						<div class="productInfo">
-							<ui5-title level="H5">Description:</ui5-title>
-							<ui5-title level="H5" id="lblDesc"></ui5-title>
-						</div>
-						<br />
-						<div class="productInfo">
-							<ui5-title level="H5">Supplier:</ui5-title>
-							<ui5-title level="H5" id="lblSupplier"><b>Titanium</b></ui5-title>
-						</div>
-					</div>
-				</div>
-				<div class="productInfo" style="align-self: start">
-					<ui5-title level="H5">Rating:</ui5-title>
-					<ui5-rating-indicator id="productRating" accessible-name="Hello World" value="3.5"
-					></ui5-rating-indicator>
-				</div>
-				<span></span>
-			</div>
-			<br /><br /><br />
-			<ui5-title level="H3">Suppliers</ui5-title>
-			<br />
-		</section>
-	</div>
+	<div class="col" slot="midColumn"></div>
 </ui5-flexible-column-layout>
