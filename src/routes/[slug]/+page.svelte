@@ -10,49 +10,95 @@
 	import '@ui5/webcomponents/dist/TabSeparator.js';
 	import '@ui5/webcomponents/dist/ToggleButton.js';
 
+	import '@ui5/webcomponents-fiori/dist/ShellBar.js';
+	import '@ui5/webcomponents-fiori/dist/ShellBarItem.js';
+	import '@ui5/webcomponents-fiori/dist/FlexibleColumnLayout.js';
+
+	import '@ui5/webcomponents-icons/dist/da.js';
+	import '@ui5/webcomponents-icons/dist/da-2.js';
+	import '@ui5/webcomponents-icons/dist/incoming-call.js';
+	import '@ui5/webcomponents-icons/dist/disconnected.js';
+	import '@ui5/webcomponents-icons/dist/camera.js';
+	import '@ui5/webcomponents-icons/dist/laptop.js';
+	import '@ui5/webcomponents-icons/dist/desktop-mobile.js';
+	import '@ui5/webcomponents-icons/dist/responsive.js';
+	import '@ui5/webcomponents-icons/dist/print.js';
+	import '@ui5/webcomponents-icons/dist/iphone.js';
+	import '@ui5/webcomponents-icons/dist/ipad.js';
+	import '@ui5/webcomponents-icons/dist/menu2.js';
+	import '@ui5/webcomponents-icons/dist/menu.js';
+	import '@ui5/webcomponents-icons/dist/slim-arrow-right.js';
+
+	import '@ui5/webcomponents/dist/Button.js';
+	import '@ui5/webcomponents/dist/Label.js';
+
+	import '@ui5/webcomponents/dist/Bar.js';
+	import '@ui5/webcomponents-fiori/dist/Page.js';
+
+	import '@ui5/webcomponents-icons/dist/home.js';
+	import '@ui5/webcomponents-icons/dist/action-settings.js';
+
 	export let data;
+
+	const onItemClick = (event) => {
+		const selectedKey = event.detail.item.getAttribute('data-key');
+		window.location.href = '/' + selectedKey;
+	};
 </script>
 
-<div class="colHeader">
-	<ui5-title id="col2title" level="H2" style="min-width: 1px;"></ui5-title>
-	<div class="colSubHeader">
-		<ui5-button design="Emphasized">Edit</ui5-button>
-		<ui5-button design="Transparent" icon="add"></ui5-button>
-		<ui5-button id="fullscreenMidColumn" design="Transparent" icon="full-screen"></ui5-button>
-		<ui5-button id="closeMidColumn" icon="decline" design="Transparent"></ui5-button>
+<ui5-flexible-column-layout id="fcl" layout="TwoColumnsMidExpanded" disable-resizing="true">
+	<div slot="startColumn">
+		<ui5-shellbar
+			primary-title="Smart Store, New York"
+			notifications-count="4"
+			show-notifications
+			show-product-switch
+		>
+			<ui5-toggle-button icon="sap-icon://da" slot="assistant"></ui5-toggle-button>
+			<ui5-shellbar-item icon="disconnected" text="Disconnect"></ui5-shellbar-item>
+		</ui5-shellbar>
+		<ui5-list
+			id="col1list"
+			header-text="Products (13)"
+			selection-mode="Single"
+			on:item-click={onItemClick}
+		>
+			{#each data.todos as { ID, title }}
+				<ui5-li data-key={ID}>{title}</ui5-li>
+			{/each}
+		</ui5-list>
 	</div>
-</div>
-<br />
-<section style="padding: 1rem 1rem;">
-	<ui5-title level="H3">{data.ID}</ui5-title>
-	<br />
-	<div
-		style="display:flex; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap"
-	>
-		<div style="display:flex; flex-direction: row; align-items: center;">
-			<ui5-avatar
-				id="avatar"
-				icon="laptop"
-				color-scheme="Accent5"
-				size="XL"
-				style="margin: 0 1rem; min-width: 7rem;"
-			>
-			</ui5-avatar>
+	<div class="col" slot="midColumn" style="height: 100vh; margin: 0">
+		<ui5-page background-design="Solid">
+			<ui5-bar design="Header" slot="header">
+				<ui5-button design="Transparent" icon="home" tooltip="Go home" slot="startContent"
+				></ui5-button>
+				<ui5-label slot="startContent">Title</ui5-label>
+				<ui5-button
+					design="Transparent"
+					icon="action-settings"
+					tooltip="Go to settings"
+					slot="endContent"
+				></ui5-button>
+			</ui5-bar>
 			<div>
-				<div class="productInfo">
-					<ui5-title level="H5">Product:</ui5-title>
-					<ui5-title level="H5" id="lblName"></ui5-title>
-				</div>
+				<p class="content-paragraph">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+					ut labore et dolore magna aliqua. Turpis massa sed elementum tempus egestas sed sed risus
+					pretium. Eget nullam non nisi est sit amet facilisis. Imperdiet dui accumsan sit amet
+					nulla facilisi morbi. Sem viverra aliquet eget sit amet tellus cras adipiscing. Faucibus
+					purus in massa tempor nec. Egestas quis ipsum suspendisse ultrices gravida dictum. Amet
+					facilisis magna etiam tempor. Sapien et ligula ullamcorper malesuada proin libero nunc
+					consequat. Ac orci phasellus egestas tellus. Quis imperdiet massa tincidunt nunc.
+				</p>
 			</div>
-		</div>
-		<div class="productInfo" style="align-self: start">
-			<ui5-title level="H5">{data.title}</ui5-title>
-			<ui5-rating-indicator id="productRating" accessible-name="Hello World" value="3.5"
-			></ui5-rating-indicator>
-		</div>
-		<span></span>
+			<div slot="footer">
+				<ui5-bar design="FloatingFooter">
+					<ui5-button design="Positive" slot="endContent">Agree</ui5-button>
+					<ui5-button design="Negative" slot="endContent">Decline</ui5-button>
+					<ui5-button design="Transparent" slot="endContent">Cancel</ui5-button>
+				</ui5-bar>
+			</div>
+		</ui5-page>
 	</div>
-	<br /><br /><br />
-	<ui5-title level="H3">Suppliers</ui5-title>
-	<br />
-</section>
+</ui5-flexible-column-layout>
