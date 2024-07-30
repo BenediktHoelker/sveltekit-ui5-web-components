@@ -10,6 +10,8 @@
 
 	import '@ui5/webcomponents-icons/dist/AllIcons.js';
 
+	import { enhance } from '$app/forms';
+
 	export let todo = { title: '' };
 </script>
 
@@ -24,18 +26,14 @@
 			slot="endContent"
 		></ui5-button>
 	</ui5-bar>
-	<ui5-form header-text="Address" layout="S1 M2 L2 XL2" style="margin-top: 10px;" method="POST">
-		<ui5-form-item>
-			<ui5-label slot="labelContent">Title</ui5-label>
-			<ui5-input on:input={(e) => (todo.title = e.target.value)} value={todo.title}></ui5-input>
-		</ui5-form-item>
-	</ui5-form>
-
-	<form header-text="Address" layout="S1 M2 L2 XL2" style="margin-top: 10px;" method="POST">
-		<label>
-			Title
-			<input name="title" autocomplete="off" bind:value={todo.title} />
-		</label>
+	<form method="POST" use:enhance>
+		<ui5-form header-text="Address" layout="S1 M2 L2 XL2" style="margin-top: 10px;">
+			<ui5-form-item>
+				<ui5-label slot="labelContent">Title</ui5-label>
+				<ui5-input name="title" on:input={(e) => (todo.title = e.target.value)} value={todo.title}
+				></ui5-input>
+			</ui5-form-item>
+		</ui5-form>
 	</form>
 	<div slot="footer">
 		<ui5-bar design="FloatingFooter">
