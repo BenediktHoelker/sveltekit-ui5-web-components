@@ -17,7 +17,7 @@
 
 	const onItemClick = (event) => {
 		const selectedKey = event.detail.item.getAttribute('data-key');
-		selectedTodo = data.todos.find((todo) => todo.ID === selectedKey);
+		selectedTodo = data.todos.find((todo) => todo.ID == selectedKey);
 	};
 </script>
 
