@@ -16,8 +16,8 @@
 		}
 	},
 	"devDependencies": {
-		"@cap-js/sqlite": "^1",
 		"@cap-js/cds-types": "^0.6",
+		"@cap-js/sqlite": "^1",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
@@ -34,8 +34,10 @@
 	"type": "module",
 	"dependencies": {
 		"@sap/cds": "^8",
-		"express": "^4",
 		"@ui5/webcomponents": "^2.0.1",
-		"@ui5/webcomponents-fiori": "^2.0.1"
+		"@ui5/webcomponents-fiori": "^2.0.1",
+		"express": "^4",
+		"sequelize": "^6.37.3",
+		"sqlite3": "^5.1.7"
 	}
 }

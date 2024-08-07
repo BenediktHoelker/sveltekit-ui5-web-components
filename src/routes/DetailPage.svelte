@@ -12,7 +12,7 @@
 
 	import { enhance } from '$app/forms';
 
-	export let todo = { title: '' };
+	export let todo = { title: '', ID: "" };
 </script>
 
 <ui5-page background-design="Solid">
@@ -31,6 +31,11 @@
 			<ui5-form-item>
 				<ui5-label slot="labelContent">Title</ui5-label>
 				<ui5-input name="title" on:input={(e) => (todo.title = e.target.value)} value={todo.title}
+				></ui5-input>
+			</ui5-form-item>
+			<ui5-form-item>
+				<ui5-label slot="labelContent">ID</ui5-label>
+				<ui5-input type="Number" name="ID" on:input={(e) => (todo.ID = e.target.value)} value={todo.ID}
 				></ui5-input>
 			</ui5-form-item>
 		</ui5-form>
