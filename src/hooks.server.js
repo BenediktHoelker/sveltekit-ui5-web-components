@@ -9,3 +9,5 @@ if (!building) {
     server = await cds.server({in_memory: true});
     // await runAllTheInitFunctions();
 }
+
+export { handle } from "./auth"

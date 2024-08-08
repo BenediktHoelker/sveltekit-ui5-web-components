@@ -1,49 +1,30 @@
 <script>
-	import '@ui5/webcomponents/dist/Avatar.js';
-	import '@ui5/webcomponents/dist/Button.js';
-	import '@ui5/webcomponents/dist/List.js';
-	import '@ui5/webcomponents/dist/ListItemStandard.js';
-	import '@ui5/webcomponents/dist/Title.js';
-
-	import '@ui5/webcomponents-fiori/dist/ShellBar.js';
-	import '@ui5/webcomponents-fiori/dist/ShellBarItem.js';
-	import '@ui5/webcomponents-fiori/dist/FlexibleColumnLayout.js';
-
-	import '@ui5/webcomponents-icons/dist/AllIcons.js';
-	import DetailPage from './DetailPage.svelte';
-
-	export let data;
-	export let selectedTodo;
-
-	const onItemClick = (event) => {
-		const selectedKey = event.detail.item.getAttribute('data-key');
-		selectedTodo = data.todos.find((todo) => todo.ID == selectedKey);
-	};
-</script>
-
-<ui5-flexible-column-layout id="fcl" layout="TwoColumnsMidExpanded" disable-resizing="true">
-	<div slot="startColumn">
-		<ui5-shellbar
-			primary-title="Smart Store, New York"
-			notifications-count="4"
-			show-notifications
-			show-product-switch
-		>
-			<ui5-shellbar-item icon="disconnected" text="Disconnect"></ui5-shellbar-item>
-		</ui5-shellbar>
-		<ui5-list
-			id="col1list"
-			header-text="Products (13)"
-			selection-mode="Single"
-			on:item-click={onItemClick}
-		>
-			{#each data.todos as { ID, title }}
-				<ui5-li data-key={ID}>{title}</ui5-li>
-			{/each}
-		</ui5-list>
-	</div>
-
-	<div class="col" slot="midColumn" style="height: 100vh; margin: 0">
-		<DetailPage todo={selectedTodo} />
-	</div>
-</ui5-flexible-column-layout>
+	import { SignIn, SignOut } from "@auth/sveltekit/components"
+	import { page } from "$app/stores"
+  </script>
+   
+  <h1>SvelteKit Auth Example</h1>
+  <div>
+	{#if $page.data.session}
+	  {#if $page.data.session.user?.image}
+		<img
+		  src={$page.data.session.user.image}
+		  class="avatar"
+		  alt="User Avatar"
+		/>
+	  {/if}
+	  <span class="signedInText">
+		<small>Signed in as</small><br />
+		<strong>{$page.data.session.user?.name ?? "User"}</strong>
+	  </span>
+	  <SignOut>
+		<div slot="submitButton" class="buttonPrimary">Sign out</div>
+	  </SignOut>
+	{:else}
+	  <span class="notSignedInText">You are not signed in</span>
+	  <SignIn>
+		<div slot="submitButton" class="buttonPrimary">Sign in</div>
+	  </SignIn>
+	  <SignIn provider="facebook"/>
+	{/if}
+  </div>
