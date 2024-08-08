@@ -4,8 +4,9 @@ import cds from '@sap/cds';
 // const srv = await cds.connect.to('BookshopService');
 // const { Books } = srv.entities('sap.capire.bookshop');
 
-export async function load() {
+export async function load(options) {
 	// const todos = await srv.read(Books);
+	console.log(options);
 	return {
 		todos
 	};
