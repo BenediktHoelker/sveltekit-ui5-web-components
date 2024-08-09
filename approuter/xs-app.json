@@ -6,7 +6,8 @@
       "source": "^(.*)$",
       "target": "$1",
       "destination": "vite-dev-server",
-      "authenticationType": "xsuaa"
+      "authenticationType": "xsuaa",
+      "csrfProtection": false
     }
   ]
 }
