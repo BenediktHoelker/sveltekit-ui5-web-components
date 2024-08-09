@@ -4,16 +4,12 @@
 	"private": true,
 	"scripts": {
 		"start:cap": "cds run",
+		"watch:cap": "cds watch",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write ."
-	},
-	"cds": {
-		"requires": {
-			"auth": "mocked"
-		}
 	},
 	"devDependencies": {
 		"@cap-js/cds-types": "^0.6",
@@ -42,5 +38,10 @@
 		"express": "^4",
 		"sequelize": "^6.37.3",
 		"sqlite3": "^5.1.7"
+	},
+	"cds": {
+		"requires": {
+			"auth": "jwt"
+		}
 	}
 }
